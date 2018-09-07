@@ -18,8 +18,7 @@ Gem::Specification.new do |s|
 gdstruct - GDS (General Data Structure), a universal, composable data structure, used to store any kind of data. 
 Typical usage is the definition of configurations, specifications and data sets. 
 The GDS language is a special DSL (domain specific language) for defining general data structures. 
-It uses a succinct, indentation-sensitive syntax which makes data representation clearer and more readable. 
-The building blocks for general data structures are hashes and arrays.
+It uses a succinct, indentation-sensitive syntax which makes data representation clear and readable. 
 EOS
 
   s.add_dependency 'treetop', '~>1.6', '>= 1.6.9'

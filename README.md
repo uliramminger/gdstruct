@@ -5,7 +5,7 @@ A General Data Structure (GDS) is a universal, composable data structure, used t
 This could be for example the definition of configurations, specifications and data sets.
 Typical usage is the definition of configurations, specifications and data sets. 
 The GDS language is a special DSL (domain specific language) for defining general data structures. 
-It uses a succinct, indentation-sensitive syntax which makes data representation clearer and more readable. 
+It uses a succinct, indentation-sensitive syntax which makes data representation clear and readable. 
 The building blocks for general data structures are hashes and arrays.
 
 Installation
