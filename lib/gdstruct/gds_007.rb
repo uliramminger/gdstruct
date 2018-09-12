@@ -24,7 +24,6 @@ module LDLgeneratedLanguage
         puts "GDS: Error happend, while parsing the definition: line #{lineOfFailure}, column #{columnOfFailure}"
         puts parser.failure_reason  if parser.failure_reason
         puts "--->"
-        
         puts parser.input.lines[((lineOfFailure-1-5)>0 ? (lineOfFailure-1-5) : 0)..(lineOfFailure-1)]
         puts ' '*((parser.failure_column) -1) + '^'
         puts "<---"
