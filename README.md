@@ -18,7 +18,7 @@ gem install gdstruct
 A Short Example
 ===============
 
-~~~ruby
+~~~
 require "gdstruct"
 
 h = GDstruct.c( <<-EOS )
@@ -178,10 +178,10 @@ transforms to
 ] 
 ~~~
 
-Futher Information
+Further Information
 ==================
 
-You will find futher information here [https://urasepandia.de/gds.html](https://urasepandia.de/gds.html)
+You will find further information here:  [urasepandia.de/gds.html](https://urasepandia.de/gds.html)
 
 Maintainer
 ==========

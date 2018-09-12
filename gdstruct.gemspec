@@ -21,7 +21,7 @@ The GDS language is a special DSL (domain specific language) for defining genera
 It uses a succinct, indentation-sensitive syntax which makes data representation clear and readable. 
 EOS
 
-  s.add_dependency 'treetop', '~>1.6', '>= 1.6.9'
+  s.add_dependency 'treetop', '~> 1.6', '>= 1.6.9'
 
   s.add_development_dependency 'rake', '~> 12'
   s.add_development_dependency 'minitest', '~> 5.1'
