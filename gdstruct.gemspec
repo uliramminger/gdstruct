@@ -1,7 +1,4 @@
-lib = File.expand_path('../lib', __FILE__)
-$LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-
-require 'gdstruct/version'
+require_relative 'lib/gdstruct/version'
 
 Gem::Specification.new do |s|
 
@@ -11,7 +8,7 @@ Gem::Specification.new do |s|
   s.authors     = [ 'Uli Ramminger' ]
   s.email       = 'uli@urasepandia.de'
   s.homepage    = 'https://urasepandia.de/gds.html'
-  s.files       = %w(CHANGELOG MIT-LICENSE Rakefile README.md) + Dir["{lib}/**/*"] 
+  s.files       = %w(CHANGELOG.md MIT-LICENSE Rakefile README.md) + Dir["{lib}/**/*"] 
   s.license     = 'MIT'
 
   s.description = <<-EOS

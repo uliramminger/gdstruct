@@ -6,6 +6,11 @@ Rake::TestTask.new do |t|
   t.verbose = true
 end
 
+desc "Gem build"
+task :gembuild do
+  puts `gem build gdstruct.gemspec`
+end
+
 desc "Run tests"
 task :default => :test
 

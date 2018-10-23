@@ -22,9 +22,8 @@ A Short Example
 require "gdstruct"
 
 h = GDstruct.c( <<-EOS )
-:
-  a val a
-  b val b
+a val a
+b val b
 EOS
 
 # => h = { a: 'val a', b: 'val b' }
@@ -44,26 +43,25 @@ Tab characters are not allowed for indentation.
 ## Another Example
 
 ~~~
-:
-  caption foo
-  credit  bar
-  images
-    small
-      url  http://mywebsite.com/image-small.jpg
-      dimensions
-        height 500
-        width  500
-    large
-      url  http://mywebsite.com/image-large.jpg
-      dimensions
-        height 500
-        width  500
-  videos
-    small
-      preview  http://mywebsite.com/video.m4v
-      dimensions
-        height 300
-        width  400
+caption foo
+credit  bar
+images
+  small
+    url  http://mywebsite.com/image-small.jpg
+    dimensions
+      height 500
+      width  500
+  large
+    url  http://mywebsite.com/image-large.jpg
+    dimensions
+      height 500
+      width  500
+videos
+  small
+    preview  http://mywebsite.com/video.m4v
+    dimensions
+      height 300
+      width  400
 ~~~
 
 transforms to
