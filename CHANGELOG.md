@@ -1,5 +1,23 @@
 # CHANGELOG
 
+### 0.6.1 - (2018-10-27)
+
+* __bugfix__  
+  bugs in classic Ruby syntax fixed, [:a], and {a: :b} was not recognized
+  
+* __change__  
+  if @env is not allowed (allow_env: false) then the result will be nil, it was "" before
+  if @r is not allowed (context: not set to binding) then the result will be nil, it was "" before
+    
+* __bugfix__  
+  @env: now before and after the environment variable there are space characters allowed, they will be stripped off
+    
+* __bugfix__  
+  now: between the definition of a key and a value there needs to be at least one space character or a block comment  
+  before: for example, the definition lkmönnk was converted to { lkm: "önnk" }, now it produces a syntax error  
+  the following expressiong for defining a key and a value (symbol) is not valid any more: k:v  
+  you would need to write it like k :v  
+
 ### 0.6.0 - (2018-10-23)
 
 * __feature__  
