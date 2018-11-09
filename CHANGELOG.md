@@ -1,9 +1,24 @@
 # CHANGELOG
 
+### 0.7.0 - (2018-11-09)
+
+* __feature__  
+  classic Ruby syntax: now the expression can be spread over multiple lines, that means line breaks (newline characters) can occure within the expression
+
+* __bugfix__  
+  classic Ruby syntax: the following was not recognized: [k: 'v']
+
+* __feature__  
+  escaping in single-quoted and double-quoted strings: \n is now converted to a newline character
+
+* __bugfix__  
+  escaping in single-quoted and double-quoted strings was not handled properly  
+  there also was a syntax issue
+  
 ### 0.6.1 - (2018-10-27)
 
 * __bugfix__  
-  bugs in classic Ruby syntax fixed, [:a], and {a: :b} was not recognized
+  bugs in classic Ruby syntax fixed: [:a], and {a: :b} was not recognized
   
 * __change__  
   if @env is not allowed (allow_env: false) then the result will be nil, it was "" before
