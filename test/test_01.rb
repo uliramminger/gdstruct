@@ -4,7 +4,7 @@ require 'minitest/autorun'
 
 class TestGdstruct < Minitest::Test
   
-  require 'language_testcases.rb'
+  require_relative 'language_testcases.rb'
   
   def setup
   end
@@ -36,6 +36,33 @@ class TestGdstruct < Minitest::Test
       assert_equal errorHappened, false
       assert_equal res, expectedResult  
     end    
+  end
+  
+  def test_gds_file
+    puts "Positive Testcases, test gds file"
+    puts "================================="
+    
+    require_relative "testcase01_res.rb" 
+
+    sentence = File.read( File.join( File.dirname(__FILE__), 'testcase01.gdstruct' ) )
+        
+    puts sentence
+    puts "--"
+    
+    errorHappened = false
+
+    res = nil
+  
+    begin    
+      res = GDstruct.c( sentence )
+
+    rescue Exception => e
+      puts "Error:Exception: #{e.inspect}"
+      errorHappened = true
+    end
+  
+    assert_equal errorHappened, false
+    assert_equal res, Testcase01_res  
   end
   
   def test_negative_cases

@@ -10,7 +10,7 @@ You will find further information here:  https://urasepandia.de/gds.html
 =end
 #===============================================================================
 
-require_relative 'gdstruct/gds_011'
+require_relative 'gdstruct/gds_012'
 
 #===============================================================================
 

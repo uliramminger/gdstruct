@@ -1,5 +1,10 @@
 # CHANGELOG
 
+### 0.7.1 - (2018-11-12)
+
+* __bugfix__  
+  again an error in escaping single-quoted and double-quoted strings  
+  
 ### 0.7.0 - (2018-11-09)
 
 * __feature__  

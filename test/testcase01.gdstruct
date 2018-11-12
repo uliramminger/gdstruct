@@ -1,0 +1,28 @@
+# file: ./test/testcase01.gdstruct
+
+double_quoted_strings ,
+  ""
+  "'"
+  "\'"
+  "\ "
+  "\\"
+  "\""
+  "\\\""
+  "\n"
+  "\\n"
+  "\\\n"
+  "\\\\n"
+  
+single_quoted_strings ,
+  ''
+  '"'
+  '\"'
+  '\ '
+  '\\'
+  '\''
+  '\\\''
+  '\n'
+  '\\n'
+  '\\\n'
+  '\\\\n'
+  
