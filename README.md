@@ -147,8 +147,8 @@ In combination with the pipe symbol (__\|__), which allows to define multiple va
 this features a slim and clearly arranged, table-like style for data.
 
 ~~~
-$country(name,capital,area,population,vehicleRegistrationCode,iso3166code,callingCode)
-, $country   /*
+@schema country(name,capital,area,population,vehicleRegistrationCode,iso3166code,callingCode)
+, @schema country   /*
     name            capital            area (km^2)   population      vehicleRegistrationCode   iso3166code   callingCode
   ---------------------------------------------------------------------------------------------------------------------------- */
   : Deutschland   | Berlin           |    357_385  |    82_521_653 | D                       | DE          | 49
@@ -177,7 +177,7 @@ transforms to
 ~~~
 
 Further Information
-==================
+===================
 
 You will find further information here:  [urasepandia.de/gds.html](https://urasepandia.de/gds.html)
 

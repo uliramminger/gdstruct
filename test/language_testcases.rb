@@ -745,9 +745,9 @@ EOS
 # comments inside format schemas
 [ 
 <<EOS,
-$person(firstname,lastname,age)
+@schema person(firstname,lastname,age)
 : 
-  /* comment */ persons /*c*/ , /*c*/ $person /*c*/
+  /* comment */ persons /*c*/ , /*c*/ @schema person /*c*/
     : /*c*/ Harry /*c*/ | /*c*/ Langemann /*c*/ | /*c*/ 44 /*c*/
     : Susi  | Heimstett | 32
     : /*c*/ 'Bob' /*c*/ | /*c*/ "Meiermann" /*c*/ | /*c*/ 57 /*c*/
@@ -822,8 +822,8 @@ EOS
 
 [ 
 <<EOS,
-$country(name,capital,area,population,vehicleRegistrationCode,iso3166code,callingCode)
-, $country   /*
+@schema country(name,capital,area,population,vehicleRegistrationCode,iso3166code,callingCode)
+, @schema country   /*
     name                  capital            area (km^2)   population      vehicleRegistrationCode   iso3166code   callingCode
   ---------------------------------------------------------------------------------------------------------------------------- */
   : Deutschland         | Berlin           |    357_385  |    82_521_653 | D                       | DE          | 49
@@ -851,29 +851,29 @@ EOS
 
 [ 
 <<EOS,
-$p(firstname, lastname, phone1, phone2, email, website)  # person
-$a(street, zipcode, city, country)                       # address
-, $p
+@schema p(firstname, lastname, phone1, phone2, email, website)  # person
+@schema a(street, zipcode, city, country)                       # address
+, @schema p
   : May         |  Grimes       |  '1-916-595-1175'   |  '(690) 557-4123'   |  may@connelly.name      |  https://www.ryanwolff.net
-    addresses , $a
+    addresses , @schema a
       : Grayce Mall 4833           |  77071  |  East Rebeka           |  Cocos (Keeling) Islands 
       : Abshire Turnpike 297       |  94595  |  Dasiaberg             |  Cocos (Keeling) Islands 
       : Ortiz Shores 29441         |  56813  |  Windlerbury           |  Anguilla             
       : Legros Village 621         |  42101  |  North Flavio          |  Cape Verde
                  
   : Jammie      |  Beahan       |  '(717) 922-5565'   |  '(345) 161-3052'   |  jammie@dicki.biz       |  https://www.corkerylind.org
-    addresses , $a
+    addresses , @schema a
       : Rosalyn Ports 2019        |  35316  |  East Willachester     |  Democratic People's Republic of Korea 
       : Rosario Locks 56923       |  11183  |  North Marionbury      |  Mozambique           
       
   : Mariane     |  Roob         |  '(749) 095-8597'   |  '(783) 183-1409'   |  mariane@fay.com        |  https://www.bosco.co     
-    addresses , $a
+    addresses , @schema a
       : Dickens Pine 89210        |  24325  |  Lake Alessandraton    |  Nicaragua            
       : Kamren Corners 742        |  98862  |  Brionnamouth          |  Guadeloupe           
       : Erik Branch 67028         |  56464  |  Kertzmannstad         |  Kyrgyz Republic      
       
   : Ansel       |  Braun        |  '(162) 247-8471'   |  '303-108-0535'     |  ansel@heidenreich.name |  https://www.quitzondickens.net
-    addresses , $a
+    addresses , @schema a
       : Littel Path 650           |  26250  |  Lorenzoton            |  Saint Helena         
 EOS
   [
