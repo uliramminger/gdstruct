@@ -720,6 +720,25 @@ EOS
   { k1: 'v1', k2: 'v2', k3: [1,2,3], k4: [1,2] } 
 ],
 
+[
+<<EOS,
+,
+  /* !!! wrong block comment !!! */ ,
+    1
+    2
+EOS
+  [ [ 1, 2 ] ]
+],
+
+[
+<<EOS,
+,
+  /* !!! wrong block comment !!! */ :
+    k1 v1
+EOS
+  [ { k1: 'v1' } ]
+],
+
 # --------------------------------------------------
 
 [ 
@@ -1087,23 +1106,6 @@ EOS
     /*bc !!! wrong indentation !!! */ v2
   
 EOS
-
-# wrong block comments
-
-<<EOS,
-,
-  /* !!! wrong block comment !!! */ ,
-    1
-    2
-EOS
-
-<<EOS,
-,
-  /* !!! wrong block comment !!! */ :
-    k1 v1
-EOS
-
-# ---
 
 <<EOS,
 :

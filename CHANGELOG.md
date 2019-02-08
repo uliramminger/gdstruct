@@ -1,5 +1,15 @@
 # CHANGELOG
 
+### 0.8.1 - (2019-02-08) 
+
+* __feature__  
+  improving the consistency of block comments; they can appear now at the beginning of every line and every construct  
+  now they even can appear before a colon (:) for the definition of a hash, and before a comma (,) for the definition of an array  
+  you just need to pay attention for the proper indentation
+    
+* __change__  
+  internal change: improving the grammar for the GDS language - reducing the number of rule alternatives  
+
 ### 0.8.0 - (2018-12-14)
 
 * __feature__  

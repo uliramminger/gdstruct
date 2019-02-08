@@ -2,11 +2,16 @@ gdstruct - GDS - General Data Structure
 =======================================
 
 A General Data Structure (GDS) is a universal, composable data structure, used to store any kind of data.   
-This could be for example the definition of configurations, specifications and data sets.
-Typical usage is the definition of configurations, specifications and data sets. 
-The GDS language is a special DSL (domain specific language) for defining general data structures. 
+The building blocks for general data structures are hashes and arrays. 
+In this definition a General Data Structure (GDS) is either a hash or an array or any composition of nested hashes and arrays.  
+
+The defined data can be used in the following situations:
+* for the configuration or specification of systems, processes, services, frameworks, objects, methods or functions
+* for seeding a database or any other data model
+* to convert to other data representation formats like JSON, XML, YAML
+
+The GDS language is a special DSL (domain specific language) for defining general data structures.  
 It uses a succinct, indentation-sensitive syntax which makes data representation clear and readable. 
-The building blocks for general data structures are hashes and arrays.
 
 Installation
 ============
@@ -22,11 +27,11 @@ A Short Example
 require "gdstruct"
 
 h = GDstruct.c( <<-EOS )
-a val a
-b val b
+key1 value a
+key2 value b
 EOS
 
-# => h = { a: 'val a', b: 'val b' }
+# => h = { key1: 'value a', key2: 'value b' }
 ~~~
 
 An Introduction
@@ -39,6 +44,9 @@ A comma (__,__) is used to define an array.
 
 Use indentation with two spaces for the definition of elements and for nested structures. 
 Tab characters are not allowed for indentation.
+
+The default data structure is a hash.  
+By default, the key of a key-value pair is always converted into a symbol.  
 
 ## Another Example
 
@@ -61,84 +69,61 @@ videos
     preview  http://mywebsite.com/video.m4v
     dimensions
       height 300
-      width  400
+      width  400  
 ~~~
 
 transforms to
 
 ~~~
-{
-  :caption => 'foo',
-  :credit => 'bar',
-  :images => {
-    :small => {
-      :url => 'http://mywebsite.com/image-small.jpg',
-      :dimensions => {
-        :height => 500,
-        :width => 500
-      }
-    },
-    :large => {
-      :url => 'http://mywebsite.com/image-large.jpg',
-      :dimensions => {
-        :height => 500,
-        :width => 500
-      }
-    },
-  },
-  :videos => {
-    :small => {
-      :preview => 'http://mywebsite.com/video.m4v',
-      :dimensions => {
-        :height => 300,
-        :width => 400
-      }
-    }
-  }
-}
+{ caption: "foo",
+  credit: "bar",
+  images: {
+    small: {
+      url: "http://mywebsite.com/image-small.jpg",
+      dimensions: {
+        height: 500,
+        width: 500 } },
+    large: {
+      url: "http://mywebsite.com/image-large.jpg",
+      dimensions: {
+        height: 500,
+        width: 500 } } },
+  videos: {
+    small: {
+      preview: "http://mywebsite.com/video.m4v",
+      dimensions: {
+        height: 300,
+        width: 400 } } } }
 ~~~
 
-## General Example
+## Variables and String Interpolation
+
+You can define a variable as a placeholder for a basic value.  
+In conjunction with variables, there is string interpolation supported.
+The values of variables are substituted into string literals.
 
 ~~~
-,
-  v1
-  : k2 v2
-  : k31 v31 | k32 v32 | k33 v33
-    k34 v34
-    k35 v35 | k36 v36 
-  : 
-    k41 v41
-    k42 v42
-    k43,
-    k44, 1 | 2 | 3
-      4 | 5
-      6
-      7
-      8 | 9
-      :k441 v441
-  v5
+$main_path    = /usr/john
+$service_dir  = docker-compose-service01
+$app01_dir    = application_001
+$app02_dir    = application_002
+$app03_dir    = application_003
+$service_path = $(main_path)/$(service_dir)
 
-# =>  [ 'v1', { k2: 'v2' }, { k31: 'v31', k32: 'v32', k33: 'v33', k34: 'v34', k35: 'v35', k36: 'v36' }, 
-        { k41: 'v41', k42: 'v42', k43: [], k44: [1, 2, 3, 4, 5, 6, 7, 8, 9, { k441: 'v441' } ] }, 'v5' ] 
+config
+  app01_path  $(main_path)/$(service_dir)/$(app01_dir)
+  app02_path  $(main_path)/$(service_dir)/$(app02_dir)
+  app03_path  $(service_path)/$(app03_dir)
+~~~
+transforms to
+~~~
+{ config: {
+    app01_path: "/usr/john/docker-compose-service01/application_001",
+    app02_path: "/usr/john/docker-compose-service01/application_002",
+    app03_path: "/usr/john/docker-compose-service01/application_003" } }
 ~~~
 
-## Motivation and Features
-
-  * the focus is on the essential data 
-  * structure and hierarchy is expressed using indentation (whitespace-sensitive) - avoids curly braces and square brackets
-  * uses a succinct and minimalist syntax - tries to avoid unnecessary characters
-  * in many cases colons, commas and quotes are not necessary
-  * less text makes data clearer and more readable
-  * for configuration and specification - replacement for XML, JSON, YAML
-  * for data/database seeding
-  * less text and less potential errors using schema definitions
-  * supports block comments, which could be nested
-  * allows also the definition of hash and array structures in a kind of restricted classic Ruby like syntax
-  * provides an alternative for Ruby hash and array definition without using eval(); can be used as a protection against code injection vulnerabilities, e.g. on web servers
-
-
-## Schema specifiers
+## Schema Definitions
 
 Schema specifiers can be used to predefine the keys of a hash or subhash. 
 When you specify the values you no longer need to name the key for each value.
@@ -148,7 +133,7 @@ this features a slim and clearly arranged, table-like style for data.
 
 ~~~
 @schema country(name,capital,area,population,vehicleRegistrationCode,iso3166code,callingCode)
-, @schema country   /*
+, @schema country                                                                                                              /*
     name            capital            area (km^2)   population      vehicleRegistrationCode   iso3166code   callingCode
   ---------------------------------------------------------------------------------------------------------------------------- */
   : Deutschland   | Berlin           |    357_385  |    82_521_653 | D                       | DE          | 49
@@ -176,10 +161,137 @@ transforms to
 ] 
 ~~~
 
+## References
+
+References can be used to define an alias for a certain sub structure, that means for a nested array or a nested hash.  
+Afterwards in the GDS definition, you can use the reference to refer to this sub structure.
+
+For the definition of a reference you prefix an identifier (unique name) with an __&__ ampersand.  
+For the use of a reference you prefix the same identifier with an __*__ asterisk.
+~~~
+categories , @schema( name )
+  &e_bike         : E-Bike
+  &mountain_bike  : Mountain Bike
+  &city_bike      : City Bike
+  &kids_bike      : Kids Bike
+  
+bikes , @schema( name, frame_size, wheel_diameter, weight, category )                      /*
+  ----------------------------------------------------------------------------------------   
+    name               frame size ["]   wheel diameter ["]   weight [kg]   category
+  ---------------------------------------------------------------------------------------- */  
+  : Speedstar I      | 18             | 27.5               | 23.3        | *city_bike
+  : Speedstar I      | 20             | 27.5               | 24.4        | *city_bike
+  : Speedstar II     | 22             | 27.5               | 25.5        | *city_bike
+  : Little Pony      | 16             | 16                 |  5.98       | *kids_bike
+  : Rocket           | 20             | 20                 |  7.13       | *kids_bike
+  : Easy Cruiser     | 20             | 28                 | 29.4        | *e_bike 
+  : Rough Buffalo    | 19             | 26                 | 14.7        | *mountain_bike 
+~~~
+transforms to
+~~~
+{ categories: [ { name: "E-Bike" }, { name: "Mountain Bike" }, { name: "City Bike" }, { name: "Kids Bike" } ],
+  bikes: [ { name: "Speedstar I", frame_size: 18, wheel_diameter: 27.5, weight: 23.3, category: { name: "City Bike" } },
+           { name: "Speedstar I", frame_size: 20, wheel_diameter: 27.5, weight: 24.4, category: { name: "City Bike" } },
+           { name: "Speedstar II", frame_size: 22, wheel_diameter: 27.5, weight: 25.5, category: { name: "City Bike" } },
+           { name: "Little Pony", frame_size: 16, wheel_diameter: 16, weight: 5.98, category: { name: "Kids Bike" } },
+           { name: "Rocket", frame_size: 20, wheel_diameter: 20, weight: 7.13, category: { name: "Kids Bike" } },
+           { name: "Easy Cruiser", frame_size: 20, wheel_diameter: 28, weight: 29.4, category: { name: "E-Bike" } },
+           { name: "Rough Buffalo", frame_size: 19, wheel_diameter: 26, weight: 14.7, category: { name: "Mountain Bike" } } ] }
+~~~
+
+### Merging a hash into another - @merge
+
+The __@merge__ directive can be used to merge a hash specified with a reference into another hash.
+
+~~~
+$logpath = /var/log/myapp
+
+initial_settings &init
+  priority 10
+  max_size 2000
+  max_age  10
+
+all_log_files ,  
+  : 
+    @merge *init
+    file  $(logpath)/logfile_1.log
+    
+  :  
+    @merge *init
+    file  $(logpath)/logfile_2.log
+    
+  :  
+    @merge *init
+    file     $(logpath)/logfile_3.log
+    max_age  8                          # overwrite an existing hash entry
+~~~
+transforms to
+~~~
+{ initial_settings: { priority: 10, max_size: 2000, max_age: 10 },
+  all_log_files: [ { priority: 10, max_size: 2000, max_age: 10, file: "/var/log/myapp/logfile_1.log" },
+                   { priority: 10, max_size: 2000, max_age: 10, file: "/var/log/myapp/logfile_2.log" },
+                   { priority: 10, max_size: 2000, max_age: 8, file: "/var/log/myapp/logfile_3.log" } ] }
+~~~
+
+### Inserting an array into another - @insert
+
+The __@insert__ directive can be used to insert an array specified with a reference into another array.
+
+~~~
+config_files &config_files ,
+  Gemfile
+  config/application.gdstruct
+  
+docu_files &docu_files ,
+  README.md
+  CHANGELOG.md
+  
+app_files &app_files ,
+  appmodel.rb
+  appview.rb
+  appcontroller.rb
+
+complete_file_list ,
+  @insert *config_files
+  @insert *docu_files
+  @insert *app_files
+  my_special.rb
+~~~
+transforms to
+~~~
+{ config_files: [ "Gemfile", "config/application.gdstruct" ], 
+  docu_files: [ "README.md", "CHANGELOG.md" ],
+  app_files: [ "appmodel.rb", "appview.rb", "appcontroller.rb" ],
+  complete_file_list: [ "Gemfile", "config/application.gdstruct", "README.md", "CHANGELOG.md", 
+                        "appmodel.rb", "appview.rb", "appcontroller.rb", "my_special.rb" ] }
+~~~
+
+## Motivation and Features
+
+  * the focus is on the essential data
+  * a language for humans, a human-writable format
+  * structure and hierarchy is expressed using indentation (whitespace-sensitive) - avoids curly braces and square brackets
+  * uses a succinct and minimalist syntax - tries to avoid unnecessary characters
+  * in many cases colons, commas and quotes are not necessary
+  * less text makes data clearer and more readable
+  * for configuration and specification - replacement for XML, JSON, YAML
+  * for data/database seeding
+  * less text and less potential errors using schema definitions
+  * supports block comments, which could be nested
+  * allows also the definition of hash and array structures in a kind of restricted classic Ruby like syntax
+  * provides an alternative for Ruby hash and array definition without using eval(); can be used as a protection against code injection vulnerabilities, e.g. on web servers
+
+
 Further Information
 ===================
 
-You will find further information here:  [urasepandia.de/gds.html](https://urasepandia.de/gds.html)
+You will find detailed information here:  [urasepandia.de/gds.html](https://urasepandia.de/gds.html)
+
+Use the GDS Converter, play with it and give the GDS language a try: [urasepandia.de/gdsconverter.html](https://urasepandia.de/gdsconverter.html)  
+The GDS Converter translates a GDS definition into various data representation formats and languages like Ruby, JSON, Python, XML and YAML.
+
+There is a collection of practical examples on GitHub:
+[github.com/uliramminger/gds-examples](https://github.com/uliramminger/gds-examples)
 
 Maintainer
 ==========
@@ -189,6 +301,6 @@ Uli Ramminger <uli@urasepandia.de>
 Copyright
 =========
 
-Copyright (c) 2018 Ulrich Ramminger
+Copyright (c) 2018-2019 Ulrich Ramminger
 
 See MIT-LICENSE for further details.
