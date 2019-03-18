@@ -1,12 +1,76 @@
 # CHANGELOG
 
-### 0.8.1 - (2019-02-08) 
+### 0.8.2 - (2019-03-18)
+
+* __feature__  
+  modification for classic Ruby syntax  
+  inside an array definition: after the last element a comma (,) is allowed  
+  this conforms to the Ruby syntax  
+  ~~~
+  [ 1, 2, ]
+  ~~~
+  
+* __feature__  
+  modification for classic Ruby syntax  
+  inside a hash definition: after the last key-value pair a comma (,) is allowed  
+  this conforms to the Ruby syntax  
+  ~~~
+  { k1: 'v1', k2: 'v2', }
+  ~~~
+  
+* __feature__  
+  a single key, for the definition of a subhash can now follow a colon (:) on the same line, before you had to put it on a new line   
+  the following syntax is allowed now  
+  ~~~
+  ,  
+    : k
+  ~~~
+  ~~~
+  ,  
+    : k1
+        k11 v11
+  ~~~
+  ~~~
+  ,  
+    : k1
+        k11 v11
+      k2
+  ~~~
+  ~~~
+  ,  
+    : k1
+      k2
+  ~~~
+
+* __feature__  
+  @merge can now follow a colon (:) on the same line, before you had to put it on a new line   
+  the following syntax is allowed now  
+  ~~~
+  init &init
+    prio 10
+  all,  
+    : @merge *init
+  ~~~
+
+### 0.8.1 - (2019-02-08)
 
 * __feature__  
   improving the consistency of block comments; they can appear now at the beginning of every line and every construct  
   now they even can appear before a colon (:) for the definition of a hash, and before a comma (,) for the definition of an array  
-  you just need to pay attention for the proper indentation
-    
+  you just need to pay attention for the proper indentation  
+  the following syntax is allowed now  
+  ~~~
+  ,
+    /* !!! this block comment is allowed now !!! */ ,
+      1
+      2
+  ~~~
+  ~~~
+  ,
+    /* !!! this block comment is allowed now */ :
+      k1 v1
+  ~~~
+
 * __change__  
   internal change: improving the grammar for the GDS language - reducing the number of rule alternatives  
 
@@ -61,11 +125,11 @@
   change of the use of a schema specifier  
     before : , $name  
     now    : , @schema name
-  
+
 * __breaking change__  
   default strings are no longer allowed to begin with one of the following characters: ;$!@&*:,  
   exception is a beginning string interpolation: $(var)
-  
+
 * __feature__  
   for a reference (e.g. ref)  
   @merge *ref    : in a hash  
@@ -89,7 +153,7 @@
 
 * __bugfix__  
   again an error in escaping single-quoted and double-quoted strings  
-  
+
 ### 0.7.0 - (2018-11-09)
 
 * __feature__  
@@ -104,19 +168,19 @@
 * __bugfix__  
   escaping in single-quoted and double-quoted strings was not handled properly  
   there also was a syntax issue
-  
+
 ### 0.6.1 - (2018-10-27)
 
 * __bugfix__  
   bugs in classic Ruby syntax fixed: [:a], and {a: :b} was not recognized
-  
+
 * __change__  
   if @env is not allowed (allow_env: false) then the result will be nil, it was "" before
   if @r is not allowed (context: not set to binding) then the result will be nil, it was "" before
-    
+
 * __bugfix__  
   @env: now before and after the environment variable there are space characters allowed, they will be stripped off
-    
+
 * __bugfix__  
   now: between the definition of a key and a value there needs to be at least one space character or a block comment  
   before: for example, the definition lkmönnk was converted to { lkm: "önnk" }, now it produces a syntax error  
@@ -146,11 +210,11 @@
   that means: the default structure is a hash
 
 * __breaking change__  
-  syntax change: now after colon (:) for defining a hash, there needs to be at least one space character between the colon and the key 
+  syntax change: now after colon (:) for defining a hash, there needs to be at least one space character between the colon and the key
   (if it is on the same line)
 
 * __bugfix__  
-  if the definition ended without a newline character in some cases this produced errors 
+  if the definition ended without a newline character in some cases this produced errors
 
 * __bugfix__  
   error in single-quoted and double-quoted string:  
@@ -160,7 +224,7 @@
 
 * __bugfix__  
   0 and 0d0 was not recognized as an integer, it was recognized as a string ("0","0d0")
-  
+
 ### 0.5.0 - (2018-09-06)
 
 * some changes and reorganization

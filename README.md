@@ -2,7 +2,7 @@ gdstruct - GDS - General Data Structure
 =======================================
 
 A General Data Structure (GDS) is a universal, composable data structure, used to store any kind of data.   
-The building blocks for general data structures are hashes and arrays. 
+The building blocks for general data structures are hashes and arrays.
 In this definition a General Data Structure (GDS) is either a hash or an array or any composition of nested hashes and arrays.  
 
 The defined data can be used in the following situations:
@@ -11,7 +11,7 @@ The defined data can be used in the following situations:
 * to convert to other data representation formats like JSON, XML, YAML
 
 The GDS language is a special DSL (domain specific language) for defining general data structures.  
-It uses a succinct, indentation-sensitive syntax which makes data representation clear and readable. 
+It uses a succinct, indentation-sensitive syntax which makes data representation clear and readable.
 
 Installation
 ============
@@ -19,7 +19,7 @@ Installation
 ~~~
 gem install gdstruct
 ~~~
-  
+
 A Short Example
 ===============
 
@@ -42,7 +42,7 @@ The GDS language uses two basic symbols (__:__ and __,__) for the creation of ha
 A colon (__:__) is used to define a hash.  
 A comma (__,__) is used to define an array.  
 
-Use indentation with two spaces for the definition of elements and for nested structures. 
+Use indentation with two spaces for the definition of elements and for nested structures.
 Tab characters are not allowed for indentation.
 
 The default data structure is a hash.  
@@ -125,7 +125,7 @@ transforms to
 
 ## Schema Definitions
 
-Schema specifiers can be used to predefine the keys of a hash or subhash. 
+Schema specifiers can be used to predefine the keys of a hash or subhash.
 When you specify the values you no longer need to name the key for each value.
 This facilitates the input for hashes and prevents typos for keys.  
 In combination with the pipe symbol (__\|__), which allows to define multiple values on a single line,
@@ -158,7 +158,7 @@ transforms to
   { :name=>"Canada", :capital=>"Ottawa", :area=>9984670, :population=>36503097, :vehicleRegistrationCode=>"CDN", :iso3166code=>"CA", :callingCode=>1 },
   { :name=>"France", :capital=>"Paris", :area=>643801, :population=>66991000, :vehicleRegistrationCode=>"F", :iso3166code=>"FR", :callingCode=>33 },
   { :name=>"Russia", :capital=>"Moscow", :area=>17075400, :population=>144526636, :vehicleRegistrationCode=>"RUS", :iso3166code=>"RU", :callingCode=>7 }
-] 
+]
 ~~~
 
 ## References
@@ -174,7 +174,7 @@ categories , @schema( name )
   &mountain_bike  : Mountain Bike
   &city_bike      : City Bike
   &kids_bike      : Kids Bike
-  
+
 bikes , @schema( name, frame_size, wheel_diameter, weight, category )                      /*
   ----------------------------------------------------------------------------------------   
     name               frame size ["]   wheel diameter ["]   weight [kg]   category
@@ -184,8 +184,8 @@ bikes , @schema( name, frame_size, wheel_diameter, weight, category )           
   : Speedstar II     | 22             | 27.5               | 25.5        | *city_bike
   : Little Pony      | 16             | 16                 |  5.98       | *kids_bike
   : Rocket           | 20             | 20                 |  7.13       | *kids_bike
-  : Easy Cruiser     | 20             | 28                 | 29.4        | *e_bike 
-  : Rough Buffalo    | 19             | 26                 | 14.7        | *mountain_bike 
+  : Easy Cruiser     | 20             | 28                 | 29.4        | *e_bike
+  : Rough Buffalo    | 19             | 26                 | 14.7        | *mountain_bike
 ~~~
 transforms to
 ~~~
@@ -212,16 +212,13 @@ initial_settings &init
   max_age  10
 
 all_log_files ,  
-  : 
-    @merge *init
+  : @merge *init
     file  $(logpath)/logfile_1.log
-    
-  :  
-    @merge *init
+
+  : @merge *init
     file  $(logpath)/logfile_2.log
-    
-  :  
-    @merge *init
+
+  : @merge *init
     file     $(logpath)/logfile_3.log
     max_age  8                          # overwrite an existing hash entry
 ~~~
@@ -241,11 +238,11 @@ The __@insert__ directive can be used to insert an array specified with a refere
 config_files &config_files ,
   Gemfile
   config/application.gdstruct
-  
+
 docu_files &docu_files ,
   README.md
   CHANGELOG.md
-  
+
 app_files &app_files ,
   appmodel.rb
   appview.rb
@@ -259,10 +256,10 @@ complete_file_list ,
 ~~~
 transforms to
 ~~~
-{ config_files: [ "Gemfile", "config/application.gdstruct" ], 
+{ config_files: [ "Gemfile", "config/application.gdstruct" ],
   docu_files: [ "README.md", "CHANGELOG.md" ],
   app_files: [ "appmodel.rb", "appview.rb", "appcontroller.rb" ],
-  complete_file_list: [ "Gemfile", "config/application.gdstruct", "README.md", "CHANGELOG.md", 
+  complete_file_list: [ "Gemfile", "config/application.gdstruct", "README.md", "CHANGELOG.md",
                         "appmodel.rb", "appview.rb", "appcontroller.rb", "my_special.rb" ] }
 ~~~
 
