@@ -1,0 +1,6 @@
+# testcase02c.gdstruct
+
+all
+  mypersons *persons
+
+  

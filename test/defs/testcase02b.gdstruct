@@ -1,0 +1,5 @@
+# testcase02b.gdstruct
+
+&persons persons, @schema person
+  : John   | McArthur  | 1987
+  : Berry  | Miller    | 1976

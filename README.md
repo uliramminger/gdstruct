@@ -278,6 +278,22 @@ transforms to
   * allows also the definition of hash and array structures in a kind of restricted classic Ruby like syntax
   * provides an alternative for Ruby hash and array definition without using eval(); can be used as a protection against code injection vulnerabilities, e.g. on web servers
 
+Ruby Gem
+========
+
+You can find it on RubyGems.org:  
+
+[rubygems.org/gems/gdstruct](https://rubygems.org/gems/gdstruct)
+
+<div class="topic-separator"></div>
+<div id="l-source-code" class="fragment-link"></div>
+
+Source Code
+===========
+
+You can find the source code on GitHub:  
+
+[github.com/uliramminger/gdstruct](https://github.com/uliramminger/gdstruct)
 
 Further Information
 ===================

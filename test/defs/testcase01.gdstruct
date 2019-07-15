@@ -1,4 +1,4 @@
-# file: ./test/testcase01.gdstruct
+# testcase01.gdstruct
 
 double_quoted_strings ,
   ""
@@ -12,7 +12,7 @@ double_quoted_strings ,
   "\\n"
   "\\\n"
   "\\\\n"
-  
+
 single_quoted_strings ,
   ''
   '"'
@@ -25,4 +25,3 @@ single_quoted_strings ,
   '\\n'
   '\\\n'
   '\\\\n'
-  

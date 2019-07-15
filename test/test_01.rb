@@ -3,68 +3,40 @@ require_relative '../lib/gdstruct'
 require 'minitest/autorun'
 
 class TestGdstruct < Minitest::Test
-  
-  require_relative 'language_testcases.rb'
-  
+
+  require_relative 'defs/language_testcases.rb'
+
   def setup
   end
-  
+
   def test_positive_cases
     puts "Positive Testcases"
     puts "=================="
-    
+
     TestCases_positive.each_with_index do |testcase,idx|
 
       sentence, expectedResult = testcase
-    
+
       puts "--- idx: #{idx}"
       puts sentence
       puts "--"
-      
-      errorHappened = false
 
+      errorHappened = false
       res = nil
-    
-      begin    
+
+      begin
         res = GDstruct.c( sentence )
 
       rescue Exception => e
         puts "Error:Exception: #{e.inspect}"
         errorHappened = true
       end
-    
+
       assert_equal errorHappened, false
-      assert_equal res, expectedResult  
-    end    
-  end
-  
-  def test_gds_file
-    puts "Positive Testcases, test gds file"
-    puts "================================="
-    
-    require_relative "testcase01_res.rb" 
-
-    sentence = File.read( File.join( File.dirname(__FILE__), 'testcase01.gdstruct' ) )
-        
-    puts sentence
-    puts "--"
-    
-    errorHappened = false
-
-    res = nil
-  
-    begin    
-      res = GDstruct.c( sentence )
-
-    rescue Exception => e
-      puts "Error:Exception: #{e.inspect}"
-      errorHappened = true
+      assert_equal res, expectedResult
     end
-  
-    assert_equal errorHappened, false
-    assert_equal res, Testcase01_res  
   end
-  
+
   def test_negative_cases
     puts "Negative Testcases"
     puts "=================="
@@ -74,21 +46,96 @@ class TestGdstruct < Minitest::Test
       puts "--- idx: #{idx}"
       puts sentence
       puts "---"
-      
-      errorHappened = false
 
+      errorHappened = false
       res = nil
-    
-      begin    
+
+      begin
         res = GDstruct.c( sentence )
 
       rescue Exception => e
         puts "Error:Exception: #{e.inspect}"
         errorHappened = true
       end
-    
+
       assert_equal errorHappened, true
-    end    
+    end
   end
-  
+
+  def test_gds_file
+    puts "Positive Testcases, test gds file"
+    puts "================================="
+
+    require_relative "defs/testcase01_res.rb"
+
+    sentence = File.read( File.join( File.dirname(__FILE__), 'defs', 'testcase01.gdstruct' ) )
+
+    puts sentence
+    puts "--"
+
+    errorHappened = false
+    res = nil
+
+    begin
+      res = GDstruct.c( sentence )
+
+    rescue Exception => e
+      puts "Error:Exception: #{e.inspect}"
+      errorHappened = true
+    end
+
+    assert_equal errorHappened, false
+    assert_equal res, Testcase01_res
+  end
+
+  def test_creator_01
+    puts "Test, class Creator"
+    puts "==================="
+
+    require_relative "defs/testcase02_res.rb"
+
+    errorHappened = false
+    res = nil
+
+    begin
+      gdsCreator = GDstruct::Creator.new
+      gdsCreator.include( File.read( File.join( File.dirname(__FILE__), 'defs/testcase02a.gdstruct' ) ) )
+      gdsCreator.include( File.read( File.join( File.dirname(__FILE__), 'defs/testcase02b.gdstruct' ) ) )
+      gdsCreator.include( File.read( File.join( File.dirname(__FILE__), 'defs/testcase02c.gdstruct' ) ) )
+      res = gdsCreator.create
+
+    rescue Exception => e
+      puts "Error:Exception: #{e.inspect}"
+      errorHappened = true
+    end
+
+    assert_equal errorHappened, false
+    assert_equal res, Testcase02_res
+  end
+
+  def test_creator_02
+    puts "Test, class Creator"
+    puts "==================="
+
+    require_relative "defs/testcase02_res.rb"
+
+    errorHappened = false
+    res = nil
+
+    begin
+      gdsCreator = GDstruct::Creator.new
+      gdsCreator.include( File.read( File.join( File.dirname(__FILE__), 'defs/testcase02a.gdstruct' ) ) )
+      gdsCreator.include_file( File.join( File.dirname(__FILE__), 'defs/testcase02b.gdstruct' ) )
+      gdsCreator.include_file( File.join( File.dirname(__FILE__), 'defs/testcase02c.gdstruct' ) )
+      res = gdsCreator.create
+
+    rescue Exception => e
+      puts "Error:Exception: #{e.inspect}"
+      errorHappened = true
+    end
+
+    assert_equal errorHappened, false
+    assert_equal res, Testcase02_res
+  end
+
 end

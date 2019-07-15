@@ -1,15 +1,72 @@
 # CHANGELOG
 
+### 0.9.0 - (2019-07-15)
+
+* __feature__  
+  class GDstruct::Creator  
+  for the creation of a Ruby Hash/Array structure out of possibly several separated  GDS definition strings  
+  arbitrary combination of #include and #include_file method calls  
+  final call of #create method  
+  ~~~
+  # file: data.gdstruct
+  &persons persons, @schema person        /*
+      firstname   lastname    yearOfBirth */
+    : John      | McArthur  | 1987
+    : Berry     | Miller    | 1976
+  ~~~
+  ~~~
+  # file: example.rb
+  require 'gdstruct'
+
+  creator = GDstruct::Creator.new
+
+  creator.include( <<-EOS )
+  @schema person( firstname, lastname, yearOfBirth )
+  EOS
+
+  creator.include_file( 'data.gdstruct' )
+
+  creator.include( <<-EOS )
+  all
+    mypersons *persons
+  EOS
+
+  res = creator.create
+
+  # => res = {:persons=>[{:firstname=>"John", :lastname=>"McArthur", :yearOfBirth=>1987}, {:firstname=>"Berry", :lastname=>"Miller", :yearOfBirth=>1976}],
+  #           :all=>{:mypersons=>{:persons=>[{:firstname=>"John", :lastname=>"McArthur", :yearOfBirth=>1987}, {:firstname=>"Berry", :lastname=>"Miller", :yearOfBirth=>1976}]}}}
+  ~~~
+
+* __feature__  
+  on top level: a single key, for the definition of a subhash can now follow a colon (:) on the same line; before you had to put it on a new line   
+  the following syntax is allowed now  
+  ~~~
+  : k
+  ~~~
+  ~~~
+  : k1
+      k11 v11
+  ~~~
+  ~~~
+  : k1
+      k11 v11
+    k2
+  ~~~
+  ~~~
+  : k1
+    k2
+  ~~~
+
 ### 0.8.2 - (2019-03-18)
 
 * __feature__  
   modification for classic Ruby syntax  
   inside an array definition: after the last element a comma (,) is allowed  
-  this conforms to the Ruby syntax  
+  this conforms to the Ruby syntax: a trailing comma is ignored  
   ~~~
   [ 1, 2, ]
   ~~~
-  
+
 * __feature__  
   modification for classic Ruby syntax  
   inside a hash definition: after the last key-value pair a comma (,) is allowed  
@@ -17,9 +74,9 @@
   ~~~
   { k1: 'v1', k2: 'v2', }
   ~~~
-  
+
 * __feature__  
-  a single key, for the definition of a subhash can now follow a colon (:) on the same line, before you had to put it on a new line   
+  after an array definition: a single key, for the definition of a subhash can now follow a colon (:) on the same line; before you had to put it on a new line   
   the following syntax is allowed now  
   ~~~
   ,  

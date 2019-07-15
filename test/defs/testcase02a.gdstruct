@@ -1,0 +1,3 @@
+# testcase02a.gdstruct
+
+@schema person( firstname, lastname, yearOfBirth )
