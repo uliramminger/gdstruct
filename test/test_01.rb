@@ -32,8 +32,8 @@ class TestGdstruct < Minitest::Test
         errorHappened = true
       end
 
-      assert_equal errorHappened, false
-      assert_equal res, expectedResult
+      assert_equal false, errorHappened
+      assert_equal expectedResult, res
     end
   end
 
@@ -58,7 +58,7 @@ class TestGdstruct < Minitest::Test
         errorHappened = true
       end
 
-      assert_equal errorHappened, true
+      assert_equal true, errorHappened
     end
   end
 
@@ -84,8 +84,8 @@ class TestGdstruct < Minitest::Test
       errorHappened = true
     end
 
-    assert_equal errorHappened, false
-    assert_equal res, Testcase01_res
+    assert_equal false, errorHappened
+    assert_equal Testcase01_res, res
   end
 
   def test_creator_01
@@ -109,8 +109,8 @@ class TestGdstruct < Minitest::Test
       errorHappened = true
     end
 
-    assert_equal errorHappened, false
-    assert_equal res, Testcase02_res
+    assert_equal false, errorHappened
+    assert_equal Testcase02_res, res
   end
 
   def test_creator_02
@@ -134,8 +134,8 @@ class TestGdstruct < Minitest::Test
       errorHappened = true
     end
 
-    assert_equal errorHappened, false
-    assert_equal res, Testcase02_res
+    assert_equal false, errorHappened
+    assert_equal Testcase02_res, res
   end
 
 end

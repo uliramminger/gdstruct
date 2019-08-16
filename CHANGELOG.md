@@ -1,5 +1,171 @@
 # CHANGELOG
 
+### 0.9.1 - (2019-08-16)
+
+* __feature__  
+  new syntax style: an array element can be defined as a hash with a key and an array as a value for the key and one or more values for that array on the same line  
+  multiple values for the array has to be separated by a vertical bar symbol (|)
+  that means a colon (:) a key and a comma (,) and one or more values on the same line
+  ~~~
+  valuespecs ,
+    : valuelist , 1 | 2 | 3
+
+  # => { valuespecs: [ { valuelist: [ 1, 2, 3 ] } ] }
+  ~~~
+  ~~~
+  valuespecs ,
+    : valuelist , 1 | 2 | 3
+        4
+        5
+
+  # => { valuespecs: [ { valuelist: [ 1, 2, 3, 4, 5 ] } ] }
+  ~~~
+
+* __feature__  
+  on a nested level: after a comma (,) a colon (:) can follow on the same line  
+  that means you can create an array and as the first element of this array a hash, everything on the same line  
+  ~~~
+  ,
+    , :
+
+  # => [ [ {} ] ]
+  ~~~
+  ~~~
+  ,
+    , :
+        k1
+          k11 v11
+      b
+    a
+
+  # => [ [ { k1: { k11: "v11" } }, "b" ], "a" ]
+  ~~~
+  additionally a key for the first key-value pair of the hash can also be on this line
+  ~~~
+  ,
+    , : k
+
+  # => [ [ { k: {} } ] ]
+  ~~~
+  ~~~
+  ,
+    , : k1
+          k11 v11
+          k12 v12
+        k2
+          k21 v21
+    a1
+
+  # => [ [ { k1: { k11: "v11", k12: "v12" }, k2: { k21: "v21" } } ], "a1" ]
+  ~~~
+  a first key-value pair of the hash can be on this line
+  ~~~
+  ,
+    , : k v
+
+  # => [ [ { k: "v" } ] ]
+  ~~~
+  multiple key-value pairs separated by the vertical bar symbol
+  ~~~
+  ,
+    , : k1 v1 | k2 v2
+
+  # => [ [ { k1: "v1", k2: "v2" } ] ]
+  ~~~
+
+* __feature__  
+  new syntax style: an array element can be defined as a hash with a key and an array as a value for the key on the same line  
+  that means a colon (:) a key and a comma (,) on the same line
+  ~~~
+  allvalues ,
+    : valueset1 ,
+        100
+
+  # => { allvalues: [ { valueset1: [ 100 ] } ] }
+  ~~~
+  ~~~
+  k ,
+    : k1 ,
+        100
+        200 | 300
+    : k2
+
+  # => { k: [ { k1: [ 100, 200, 300 ] }, { k2: {} } ] }
+  ~~~
+
+* __feature__  
+  on top level: after a comma (,) a colon (:) can follow on the same line  
+  that means you can create an array and as the first element of this array a hash, everything on the same line  
+  ~~~
+  , :
+
+  # => [ {} ]
+  ~~~
+  ~~~
+  , :
+      k1
+        k11 v11
+    a1
+
+  # => [ { k1: { k11: "v11" } }, "a1" ]
+  ~~~
+  additionally a key for the first key-value pair of the hash can also be on this line
+  ~~~
+  , : k
+
+  # => [ { k: {} } ]
+  ~~~
+  ~~~
+  , : k1
+        k11 v11
+        k12 v12
+      k2
+        k21 v21
+    a1
+
+  # => [ { k1: { k11: "v11", k12: "v12" }, k2: { k21: "v21" } }, "a1" ]
+  ~~~
+  a first key-value pair of the hash can be on this line
+  ~~~
+  , : k v
+
+  # => [ { k: "v" } ]
+  ~~~
+  multiple key-value pairs separated by the vertical bar symbol
+  ~~~
+  , : k1 v1 | k2 v2
+
+  # => [ { k1: "v1", k2: "v2" } ]
+  ~~~
+
+* __bugfix__  
+  definition of ruby symbols has been changed, rectified and improved
+  single quotes and double quotes have to be balanced or escaped with a backslash character  
+  the following definitions are no longer valid   
+  ~~~
+  :'
+  :"
+  :'"
+  :"'
+  :'''
+  :"""
+  ~~~
+  the following definitions are valid
+  ~~~
+  :'\''
+  :"\""
+  :'"'
+  :"'"
+  ~~~
+  it is now possible to define an empty symbol by  
+  ~~~
+  :''
+  ~~~
+  or
+  ~~~
+  :""
+  ~~~
+
 ### 0.9.0 - (2019-07-15)
 
 * __feature__  

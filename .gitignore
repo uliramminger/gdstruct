@@ -1,7 +1,9 @@
 
 *.gem
+
+.yardoc/
+doc/
 gems/
 
 .buildpath
 .project
-

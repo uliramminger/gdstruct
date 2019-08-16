@@ -47,11 +47,11 @@ class GDstruct
 
   # create a Ruby Hash/Array structure out of possibly several separated  GDS definition strings
   #
-  # # file: data.gdstruct
-  # &persons persons, @schema person        /*
-  #     firstname   lastname    yearOfBirth */
-  #   : John      | McArthur  | 1987
-  #   : Berry     | Miller    | 1976
+  #  # file: data.gdstruct
+  #  &persons persons, @schema person        /*
+  #      firstname   lastname    yearOfBirth */
+  #    : John      | McArthur  | 1987
+  #    : Berry     | Miller    | 1976
   #
   # @example
   #   require 'gdstruct'

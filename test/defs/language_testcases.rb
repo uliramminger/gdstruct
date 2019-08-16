@@ -625,13 +625,19 @@ EOS
   :$,
   :$,,
   :π
-  :'
-  :"
+  :''
+  :""
+  :'"'
+  :"'"
+  :"\\""
+  :"\\\\"
   ::
   :::
   ::::
+  :'\\''
+  :'\\\\'
 EOS
-  [ :a, :longerstring, :longer_string, :"@", :"$", :$;, :$,, :"$,,", :π, :"'", :"\"", :":", :"::", :":::" ]
+  [ :a, :longerstring, :longer_string, :"@", :"$", :$;, :$,, :"$,,", :π, :"", :"", :"\"", :"'", :"\"", :"\\", :":", :"::", :":::", :"'", :"\\" ]
 ],
 
 # quoted symbols
@@ -1083,6 +1089,17 @@ TestCases_negative = [
     val a
 EOS
 
+# wrong symbol definition
+
+<<EOS,
+,
+  :'
+EOS
+
+<<EOS,
+,
+  :"
+EOS
 
 # floating-point numbers
 <<EOS,
