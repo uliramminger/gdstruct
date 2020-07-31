@@ -1,5 +1,17 @@
 # CHANGELOG
 
+### 0.9.2 - (2020-07-31)
+
+* __change__  
+  the keyword literal for true is changed to @true; the old literal !true is still working, but is deprecated  
+  the segil __@__ is more consistent with the overall GDS syntax and the leading __!__
+  could be confusing because in many programming languages it is used as a logical negation operator  
+  the keyword literal for false is changed to @false; the old literal !false is still working, but is deprecated  
+  the keyword literal for nil is changed to @nil; the old literal !nil is still working, but is deprecated  
+
+* __internal changes__  
+  different handling of global variables and context (binding) for embedded Ruby
+
 ### 0.9.1 - (2019-08-16)
 
 * __feature__  

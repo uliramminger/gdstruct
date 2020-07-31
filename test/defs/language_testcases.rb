@@ -506,8 +506,11 @@ EOS
   !nil
   !true
   !false
+  @nil
+  @true
+  @false
 EOS
-  [ '_', '_ _ _ _ _ _ a very long string', 'nil', 'true', 'false', 1, -2, 2, 1.0, -3.0, 3.0, 0.4, -0.5, 0.5, 0.6, -0.7, 0.7, nil, true, false ]
+  [ '_', '_ _ _ _ _ _ a very long string', 'nil', 'true', 'false', 1, -2, 2, 1.0, -3.0, 3.0, 0.4, -0.5, 0.5, 0.6, -0.7, 0.7, nil, true, false, nil, true, false ]
 ],
 
 # --------------------------------------------------
