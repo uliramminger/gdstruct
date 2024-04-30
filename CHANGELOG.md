@@ -1,13 +1,66 @@
 # CHANGELOG
 
+### 0.9.3 - (2024-04-30)
+
+* __fix__  
+  In version 0.9.2 the embedded Ruby code feature (__@r__ directive) was not working.  
+
+* __feature__  
+  __@env__ directive can now handle a default value  
+  if the access to environment variables is not allowed (parameter __allow_env__) or if the environment variable does not exist then the default value is returned  
+  the default value is a single-quoted or double-quoted string literal  
+  ~~~
+  host @env( DATABASE_HOST, 'localhost' )
+
+  # if the environment variable DATABASE_HOST does not exist:
+  # => { host: 'localhost' }
+  ~~~
+  double-quoted strings support string interpolation  
+  ~~~
+  $basename = myproject
+  database  @env( DATABASE_NAME, "$(basename)_development" )
+
+  # if the environment variable DATABASE_NAME does not exist:
+  # => { database: 'myproject_development' }
+  ~~~
+
+* __feature__  
+  new syntax style: an array element can be defined as a hash with a key and the related value as an array defined with a schema definition, everything written on the same line  
+  all three types of schema definitions are supported: predefined, defined at first time use and anonymous  
+  ~~~
+  @schema valuedef( name, value )
+  all ,
+    : vals , @schema valuedef
+        : n1 | v1
+        : n2 | v2
+
+  # => { all: [ { vals: [ { name: "n1", value: "v1" }, { name: "n2", value: "v2" } ] } ] }
+  ~~~
+  ~~~
+  all ,
+    : vals , @schema valuedef( name, value )
+        : n1 | v1
+        : n2 | v2
+
+  # => { all: [ { vals: [ { name: "n1", value: "v1" }, { name: "n2", value: "v2" } ] } ] }
+  ~~~
+  ~~~
+  all ,
+    : vals , @schema( name, value )
+        : n1 | v1
+        : n2 | v2
+
+  # => { all: [ { vals: [ { name: "n1", value: "v1" }, { name: "n2", value: "v2" } ] } ] }
+  ~~~
+
 ### 0.9.2 - (2020-07-31)
 
 * __change__  
-  the keyword literal for true is changed to @true; the old literal !true is still working, but is deprecated  
+  the keyword literal for true is changed to __@true__; the old literal __!true__ is still working, but is deprecated  
   the segil __@__ is more consistent with the overall GDS syntax and the leading __!__
   could be confusing because in many programming languages it is used as a logical negation operator  
-  the keyword literal for false is changed to @false; the old literal !false is still working, but is deprecated  
-  the keyword literal for nil is changed to @nil; the old literal !nil is still working, but is deprecated  
+  the keyword literal for false is changed to __@false__; the old literal __!false__ is still working, but is deprecated  
+  the keyword literal for nil is changed to __@nil__; the old literal __!nil__ is still working, but is deprecated  
 
 * __internal changes__  
   different handling of global variables and context (binding) for embedded Ruby

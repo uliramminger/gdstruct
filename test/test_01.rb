@@ -10,6 +10,8 @@ class TestGdstruct < Minitest::Test
   end
 
   def test_positive_cases
+    puts
+    puts "="*80
     puts "Positive Testcases"
     puts "=================="
 
@@ -37,7 +39,71 @@ class TestGdstruct < Minitest::Test
     end
   end
 
+  def test_ruby
+    puts
+    puts "="*80
+    puts "Ruby Testcases"
+    puts "=============="
+
+    TestCases_ruby.each_with_index do |testcase,idx|
+
+      sentence, expectedResult = testcase
+
+      puts "--- idx: #{idx}"
+      puts sentence
+      puts "--"
+
+      errorHappened = false
+      res = nil
+
+      begin
+        res = GDstruct.c( sentence, context: binding )
+
+      rescue Exception => e
+        puts "Error:Exception: #{e.inspect}"
+        errorHappened = true
+      end
+
+      assert_equal false, errorHappened
+      assert_equal expectedResult, res
+    end
+  end
+
+  def test_env
+    puts
+    puts "="*80
+    puts "Env Testcases"
+    puts "============="
+
+    ENV["MYSPECIALENV100"] = "mySpecialEnvValue_100"
+
+    TestCases_env.each_with_index do |testcase,idx|
+
+      sentence, expectedResult = testcase
+
+      puts "--- idx: #{idx}"
+      puts sentence
+      puts "--"
+
+      errorHappened = false
+      res = nil
+
+      begin
+        res = GDstruct.c( sentence, allow_env: true )
+
+      rescue Exception => e
+        puts "Error:Exception: #{e.inspect}"
+        errorHappened = true
+      end
+
+      assert_equal false, errorHappened
+      assert_equal expectedResult, res
+    end
+  end
+
   def test_negative_cases
+    puts
+    puts "="*80
     puts "Negative Testcases"
     puts "=================="
 
@@ -63,6 +129,8 @@ class TestGdstruct < Minitest::Test
   end
 
   def test_gds_file
+    puts
+    puts "="*80
     puts "Positive Testcases, test gds file"
     puts "================================="
 
@@ -89,8 +157,10 @@ class TestGdstruct < Minitest::Test
   end
 
   def test_creator_01
-    puts "Test, class Creator"
-    puts "==================="
+    puts
+    puts "="*80
+    puts "Test, class Creator, 1"
+    puts "======================"
 
     require_relative "defs/testcase02_res.rb"
 
@@ -114,8 +184,10 @@ class TestGdstruct < Minitest::Test
   end
 
   def test_creator_02
-    puts "Test, class Creator"
-    puts "==================="
+    puts
+    puts "="*80
+    puts "Test, class Creator, 2"
+    puts "======================"
 
     require_relative "defs/testcase02_res.rb"
 
