@@ -1103,6 +1103,50 @@ EOS
 { a: nil, b: true, c: false }
 ],
 
+[
+<<EOS,
+  @schema adr ( 
+      firstname , lastname   , age ) /*
+  -----------------------------------*/
+  addresses  
+    hla  @schema adr
+      Harry     | Langemann  | 44
+    she  @schema adr
+      Susi      | Heimstett  | 32
+    bme  @schema adr
+      Bob       | Meiermann  | 57
+EOS
+{  
+  addresses: {
+    hla: { firstname: "Harry", lastname: "Langemann", age: 44 },
+    she: { firstname: "Susi" , lastname: "Heimstett", age: 32 },
+    bme: { firstname: "Bob"  , lastname: "Meiermann", age: 57 }
+  }
+}
+],
+
+[
+<<EOS,
+  @schema s ( 
+      offset1 , offset2 , offset3 )  /*
+  -----------------------------------*/
+  sensors
+    sensor1  @schema s
+      0.1     | 0.2     | 0.3
+    sensor2  @schema s
+      1.1     | 1.2     | 1.3
+    sensor3  @schema s
+      2.1     | 2.2     | 2.3
+EOS
+{  
+  sensors: {
+    sensor1: { offset1: 0.1, offset2: 0.2, offset3: 0.3 },
+    sensor2: { offset1: 1.1, offset2: 1.2, offset3: 1.3 },
+    sensor3: { offset1: 2.1, offset2: 2.2, offset3: 2.3 }
+  }
+}
+],
+
 ]
 
 #===============================================================================

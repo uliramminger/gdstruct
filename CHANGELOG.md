@@ -1,5 +1,24 @@
 # CHANGELOG
 
+### 0.9.4 - (2025-03-02)
+
+* __feature__  
+  schema for single hash definition  
+  ~~~
+  @schema adr ( 
+      firstname , lastname   , age ) /*
+  -----------------------------------*/
+  addresses  
+    hla  @schema adr
+      Harry     | Langemann  | 44
+    she  @schema adr
+      Susi      | Heimstett  | 32
+    bme  @schema adr
+      Bob       | Meiermann  | 57
+
+  # => { addresses: { hla: { firstname: "Harry", lastname: "Langemann", age: 44 }, she: { firstname: "Susi" , lastname: "Heimstett", age: 32 }, bme: { firstname: "Bob"  , lastname: "Meiermann", age: 57 } } }
+  ~~~
+
 ### 0.9.3 - (2024-04-30)
 
 * __fix__  

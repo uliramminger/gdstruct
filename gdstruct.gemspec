@@ -20,7 +20,7 @@ EOS
 
   s.add_dependency 'treetop', '~> 1.6', '>= 1.6.9'
 
-  s.add_development_dependency 'rake', '~> 12'
-  s.add_development_dependency 'minitest', '~> 5.1'
+  s.add_development_dependency 'rake', '~> 13'
+  s.add_development_dependency 'minitest', '~> 5'
 
 end

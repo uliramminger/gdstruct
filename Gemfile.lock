@@ -1,0 +1,19 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    minitest (5.25.4)
+    polyglot (0.3.5)
+    rake (13.2.1)
+    treetop (1.6.14)
+      polyglot (~> 0.3)
+
+PLATFORMS
+  x64-mingw-ucrt
+
+DEPENDENCIES
+  minitest (~> 5.25)
+  rake (~> 13.2)
+  treetop (~> 1.6.9)
+
+BUNDLED WITH
+   2.5.22

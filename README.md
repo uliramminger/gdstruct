@@ -314,6 +314,6 @@ Uli Ramminger <uli@urasepandia.de>
 Copyright
 =========
 
-Copyright (c) 2018-2024 Ulrich Ramminger
+Copyright (c) 2018-2025 Ulrich Ramminger
 
 See MIT-LICENSE for further details.
